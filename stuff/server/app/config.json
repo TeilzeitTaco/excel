@@ -1,0 +1,4 @@
+{
+    "SQLALCHEMY_TRACK_MODIFICATIONS": false,
+    "SQLALCHEMY_DATABASE_URI": "sqlite:///F:/snake-game/server/app/board.db"
+}

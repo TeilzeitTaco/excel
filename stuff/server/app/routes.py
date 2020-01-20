@@ -15,6 +15,11 @@ def download_file():
 def index():
     return(render_template("index.html"))
 
+@app.route("/top/")
+def top():
+    highscore_list = db.session.query(Highscore).order_by(Highscore.score.desc()).limit(10).all()
+    return(render_template("top.html", highscore_list=highscore_list))
+
 @app.route("/highscores/")
 @app.route("/highscores/<int:count>/")
 def highscores(count = 25):

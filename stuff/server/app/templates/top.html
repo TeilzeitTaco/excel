@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>top 10 snekcel scores</title>
+    </head>
+    <body>
+        {% for highscore in highscore_list %}
+        <p>{{loop.index}}: {{highscore.username}} has a score of {{highscore.score}}</p>
+        {% endfor %}
+    </body>
+</html>

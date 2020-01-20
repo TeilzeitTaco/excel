@@ -8,7 +8,7 @@ from app.models import Highscore
 
 @app.route("/download/")
 def download_file():
-    return send_file(os.getcwd() + "\\files\\snake.xlsm", as_attachment=True)
+    return send_file(os.getcwd() + "/files/snake.xlsm", as_attachment=True)
 
 @app.route("/")
 @app.route("/index/")

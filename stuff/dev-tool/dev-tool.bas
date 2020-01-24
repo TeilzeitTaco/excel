@@ -1,9 +1,13 @@
 #Include Once "SHA512+.bi"
 #Include Once "function.bi"
 
-#Define build_password "BE97075F6E97E042271A636398032D4446E1D2FAFE50EFB48476F97E446D89377A03B57A5663505E4F7185917ED5D25CF2C4C316FDBB0A7B4E908626B7F0C1F3"
+#Define build_password "7A8E9B31A763905588668B2348F43105F4190F5C0606C55AD230581F8F3167DCF41AA96D5ED0C51DA2255430347D6F3896B13EC9F9BC2E8F38C8B066E8408C4B"
 
-Const version = "0.1a"
+'Version secrets
+#Define vs_0_2_a "3fbdf489c004aba3589cff5db5c7e455ae26c77716becbfa018ad56681b3a79e"
+
+#Define tool_version   "0.2a"
+#Define target_version "0.2a"
 
 If createSHA512(Environ("tool-password")) <> build_password Then
 	? "Please activate the tool!"
@@ -11,6 +15,9 @@ If createSHA512(Environ("tool-password")) <> build_password Then
 EndIf
 
 Select Case Command(1)
+	Case "fake"
+		? "Not implemented!"
+
 	Case "hash"
 		? createSHA512(Command(2))
 
@@ -26,11 +33,34 @@ Select Case Command(1)
 				? "Unknown mode!"
 		End Select
 
+	Case "mac"
+		Select Case Command(2)
+			Case "0.2a"
+				? make_mac(Command(3), vs_0_2_a)
+
+			Case Else
+				? "Not available."
+		End Select
+
 	Case "magic"
+		? "Note: This is unused since version 0.1a."
 		? make_magic_number(Command(2))
-		
-	Case "info"
-		? "Tool version: "; version
+
+	Case "info", "help"
+		?
+		? "Snekcel dev-tool"
+		?
+		? "Tool version: "; tool_version
+		? "Target version: "; target_version
+		?
+		? "Commands:"
+		? Tab(4); "* fake"
+		? Tab(4); "* hash"
+		? Tab(4); "* help"
+		? Tab(4); "* hex"
+		? Tab(4); "* info"
+		? Tab(4); "* mac"
+		? Tab(4); "* magic"
 
 	Case Else
 		? "Unknown command!"

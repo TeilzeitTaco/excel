@@ -1,15 +1,15 @@
 #Include Once "datetime.bi"
 
-Function make_magic_number(ByVal src As String) As Integer
+Function make_magic_number(ByVal srcStr As String) As Integer
 	Dim magic_number As Integer
 	Dim cycles As Integer
 
-	src = src & "0"
-	For cycles = 1 To Len(src) - 1
-		If Asc(Mid(src, cycles + 1, 1)) Mod 2 <> 0 Then
-			magic_number = magic_number + Asc(Mid(src, cycles, 1))
+	srcStr = srcStr & "0"
+	For cycles = 1 To Len(srcStr) - 1
+		If Asc(Mid(srcStr, cycles + 1, 1)) Mod 2 <> 0 Then
+			magic_number = magic_number + Asc(Mid(srcStr, cycles, 1))
 		Else
-			magic_number = magic_number - Asc(Mid(src, cycles, 1))
+			magic_number = magic_number - Asc(Mid(srcStr, cycles, 1))
 		End If
 
 		magic_number = magic_number Xor Hour(Now())
@@ -32,4 +32,9 @@ Function encode_hex(ByVal srcStr As String, ByVal mode As Boolean) As String
 	EndIf
 
 	Return outStr
+End Function
+
+Function make_mac(ByVal srcStr As String, ByVal version_secret As String) As String
+	? createSHA512(srcStr) + version_secret
+	Return createSHA512(createSHA512(srcStr) + version_secret)
 End Function

@@ -36,18 +36,21 @@ def highscores(count = 25):
 def submit_highscore(hex, mac):
     # Verify message authentication code
     if make_mac(hex) != mac:
+        print("[ERROR]: MAC error!")
         return("NOT OK", 422)
 
     # Decode hex
     try:
         data_json = bytearray.fromhex(hex).decode()
     except ValueError:
+        print("[ERROR]: Hex error!")
         return("NOT OK", 422)
 
     # Decode json
     try:
         data_obj = json.loads(data_json)
     except ValueError:
+        print("[ERROR]: JSON error!")
         return("NOT OK", 422)
 
     # Check data & upload
@@ -62,10 +65,12 @@ def submit_highscore(hex, mac):
             data_obj["increase_coefficients"] != 5000 or
             data_obj["version"] != "0.2a"):
 
+            print("[ERROR]: Data error!")
             return("NOT OK", 422)
 
 
         if len(data_obj["username"]) > 32:
+            print("[ERROR]: Username error!")
             return("NOT OK", 422)
 
         hs = Highscore(username=data_obj["username"], score=data_obj["score"], data=data_json)
@@ -73,6 +78,7 @@ def submit_highscore(hex, mac):
         db.session.commit()
 
     except KeyError:
-        return("NOT OK - KEY ERROR", 422)
+        print("[ERROR]: Key error!")
+        return("NOT OK", 422)
 
     return("OK", 200)

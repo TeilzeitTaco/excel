@@ -4,8 +4,10 @@ from flask import send_file, render_template, make_response
 
 from app import app, db
 from app.models import Highscore
-from app.shared import make_mac
+from app.shared import make_mac, make_token
 
+
+tokens = []
 
 @app.route("/download/")
 def download_file():
@@ -20,6 +22,12 @@ def index():
 def top():
     highscore_list = db.session.query(Highscore).order_by(Highscore.score.desc()).limit(10).all()
     return(render_template("top.html", highscore_list=highscore_list))
+
+@app.route("/generate_token/")
+def generate_token():
+    token = make_token()
+    tokens.append(token)
+    return(token)
 
 @app.route("/highscores/")
 @app.route("/highscores/<int:count>/")

@@ -66,6 +66,7 @@ def submit_highscore(hex, mac):
             data_obj["version"] != "0.2a"):
 
             print("[ERROR]: Data error!")
+            print(data_obj)
             return("NOT OK", 422)
 
 

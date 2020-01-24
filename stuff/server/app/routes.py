@@ -7,6 +7,7 @@ from app.models import Highscore
 from app.shared import make_mac, make_token
 
 
+# List of current, legal tokens.
 tokens = []
 
 @app.route("/download/")

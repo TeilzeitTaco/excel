@@ -56,17 +56,16 @@ def submit_highscore(hex, mac):
     # Check data & upload
     try:
         if (
-            data_obj["inital_snake_length"]   != 10 or
-            data_obj["points_for_moving"]     != 1 or
-            data_obj["points_for_fruit"]      != 750 or
-            data_obj["tick_speed_ms"]         != 50 or
-            data_obj["movement_speed_cycles"] != 5 or
-            data_obj["growing_speed_steps"]   != 10 or
-            data_obj["increase_coefficients"] != 5000 or
+            data_obj["inital_snake_length"]   != "10" or
+            data_obj["points_for_moving"]     != "1" or
+            data_obj["points_for_fruit"]      != "750" or
+            data_obj["tick_speed_ms"]         != "50" or
+            data_obj["movement_speed_cycles"] != "5" or
+            data_obj["growing_speed_steps"]   != "10" or
+            data_obj["increase_coefficients"] != "5000" or
             data_obj["version"] != "0.2a"):
 
             print("[ERROR]: Data error!")
-            print(data_obj)
             return("NOT OK", 422)
 
 
